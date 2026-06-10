@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import LoginButton from "../ui/LoginButton"; // 1. 분리된 로그인 버튼 임포트
+import { useNavigate, useSearchParams } from "react-router-dom";
+import LoginButton from "../ui/LoginButton";
+import Menu from "../ui/Menu"; // 1. 분리한 Menu 컴포넌트 임포트
 
 // icon
 import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
@@ -65,7 +66,7 @@ const IconButton = styled.a`
 const SubContainer = styled.div`
     width: 100%;
     max-width: 1200px;
-    padding: 0px 24px 8px 24px;
+    padding: 0px 24px 0px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,28 +76,6 @@ const MenuBar = styled.nav`
     display: flex;
     align-items: center;
     gap: 8px;
-`;
-
-const Menu = styled.a`
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 16px;
-    font-weight: 700;
-    color: #868e96;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.2s;
-    cursor: pointer;
-
-    &.active, &:hover {
-        color: #212529;
-        background-color: #f1f3f5;
-    }
-
-    svg {
-        font-size: 18px;
-    }
 `;
 
 const FilterSelect = styled.select`
@@ -109,14 +88,30 @@ const FilterSelect = styled.select`
     border-radius: 6px;
     outline: none;
     cursor: pointer;
+    margin-bottom: 8px;
 
     &:focus {
         border-color: #12b886;
     }
 `;
 
+// 2. 관리 보수가 간편하도록 상단 메뉴 구성을 설정 데이터화(Configuration Data)
+const MENU_ITEMS = [
+    { id: "trending", text: "트렌딩", icon: <MdOutlineTrendingUp /> },
+    { id: "recommended", text: "추천", icon: <FaRegStar /> },
+    { id: "latest", text: "최신", icon: <IoMdTime /> },
+    { id: "feed", text: "피드", icon: <MdOutlineRssFeed /> }
+];
+
 function Header() {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    
+    const currentTab = searchParams.get("tab") || "trending";
+
+    const handleTabChange = (tabName) => {
+        navigate(`/?tab=${tabName}`);
+    };
 
     return (
         <Wrapper>
@@ -125,27 +120,34 @@ function Header() {
                 <UserNav>
                     <IconButton><FaSearch /></IconButton>
                     <IconButton><FaRegBell /></IconButton>
-                    
-                    {/* 2. 복잡한 인증 로직과 UI가 내포된 독립 컴포넌트 배치 */}
                     <LoginButton />
                 </UserNav>
             </TopContainer>
             
             <SubContainer>
                 <MenuBar>
-                    <Menu className="active"><MdOutlineTrendingUp /> 트렌딩</Menu>
-                    <Menu><FaRegStar /> 추천</Menu>
-                    <Menu><IoMdTime /> 최신</Menu>
-                    <Menu><MdOutlineRssFeed /> 피드</Menu>
+                    {/* 3. 수동 작성을 지우고 데이터 기반으로 자식 컴포넌트 맵핑 */}
+                    {MENU_ITEMS.map((item) => (
+                        <Menu
+                            key={item.id}
+                            icon={item.icon}
+                            text={item.text}
+                            isActive={currentTab === item.id}
+                            onClick={() => handleTabChange(item.id)}
+                        />
+                    ))}
                 </MenuBar>
+                
                 <div>
-                    <form>
-                        <FilterSelect>
-                            <option>오늘</option>
-                            <option>이번 주</option>
-                            <option>이번 달</option>
-                        </FilterSelect>
-                    </form>
+                    {currentTab === "trending" && (
+                        <form>
+                            <FilterSelect>
+                                <option>오늘</option>
+                                <option>이번 주</option>
+                                <option>이번 달</option>
+                            </FilterSelect>
+                        </form>
+                    )}
                 </div>
             </SubContainer>
         </Wrapper>
