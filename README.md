@@ -69,10 +69,10 @@ src/
 ├── index.css           # 글로벌 스크롤바 커스텀 및 공통 서체 시스템 설정
 ├── main.jsx            # 애플리케이션 진입점 및 라우터 주입
 └── App.jsx             # 전체 레이아웃 구조 정의
-
+```
 ---
 
-🛠️ 기술 스택 (Tech Stack)
+## 🛠️ 기술 스택 (Tech Stack)
 Library: React (v18+)
 
 Routing: React Router Dom
@@ -85,5 +85,5 @@ Bundler: Vite
 
 ---
 
-📝 작성자 정보
+## 📝 작성자 정보
 개발자: 성윤수 (컴퓨터소프트웨어과)
