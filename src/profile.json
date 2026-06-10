@@ -1,0 +1,37 @@
+[
+    {
+        "id": 101,
+        "profileImg": "피카츄.jpg",
+        "name": "피카츄",
+        "sub": "프론트엔드 개발 3년차입니다.",
+        "writeId": [5]
+    },
+    {
+        "id": 102,
+        "profileImg": "파이리.jpg",
+        "name": "파이리",
+        "sub": "함수형 프로그래밍과 React Hooks를 사랑하는 개발자",
+        "writeId": [3]
+    },
+    {
+        "id": 103,
+        "profileImg": "꼬부기.jpg",
+        "name": "꼬부기",
+        "sub": "깔끔한 UI/UX를 고민합니다.",
+        "writeId": [2]
+    },
+    {
+        "id": 104,
+        "profileImg": "이상해씨.jpg",
+        "name": "이상해씨",
+        "sub": "CSS 장인을 꿈꾸며 퍼블리싱을 즐깁니다.",
+        "writeId": [4]
+    },
+    {
+        "id": 105,
+        "profileImg": "야돈.jpg",
+        "name": "야돈",
+        "sub": "SPA 라우팅과 상태 관리에 관심이 많습니다.",
+        "writeId": [1]
+    }
+]
