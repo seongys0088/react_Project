@@ -13,14 +13,20 @@ import { MdOutlineRssFeed } from "react-icons/md";
 
 // 스타일
 const Wrapper = styled.div`
-
+    width: 100%;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
 `;
 
 const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 15px 20px;
+    width: 100%;
+    max-width: 1540px; 
 `;
 
 const MainTitle = styled.a`
