@@ -72,7 +72,7 @@ src/
 ```
 ---
 
-🛠️ 기술 스택 (Tech Stack)
+## 🛠️ 기술 스택 (Tech Stack)
 Library: React (v18+)
 
 Routing: React Router Dom
@@ -85,5 +85,5 @@ Bundler: Vite
 
 ---
 
-📝 작성자 정보
+## 📝 작성자 정보
 개발자: 성윤수 (컴퓨터소프트웨어과)
