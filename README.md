@@ -1,16 +1,89 @@
-# React + Vite
+# 🚀 Welog (Velog & Meta Style Tech Blog)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> React와 Styled-components를 활용하여 구현한 모던하고 미니멀한 감성의 기술 블로그 웹 애플리케이션입니다.  
+> 컴포넌트 주도 개발(CDD) 패러다임을 반영하여 가독성이 높고 유지보수가 용이한 모듈형 구조로 설계되었습니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🎨 주요 UI/UX 및 디자인 포인트 (Meta & Velog 감성)
+- **미니멀리즘 테마**: Off-White(`#f8f9fa`) 배경과 Velog의 시그니처인 민트 그린(`#12b886`) 포인트를 조화롭게 매치했습니다.
+- **정교한 Elevation 효과**: 카드 마우스 오버 시 공중에 가볍게 뜨는 반응형 섀도우 메커니즘(`cubic-bezier`)을 반영했습니다.
+- **반응형 그리드 레이아웃**: 디바이스 해상도에 맞춰 메인 피드의 카드 열이 동적으로 스위칭(`4열 -> 3열 -> 2열 -> 1열`)됩니다.
+- **가독성 극대화**: 본문 상세 페이지의 폰트 스케일(`18px`)과 행간(`line-height: 1.8`)을 미세 조정하여 장문의 기술 글도 편안하게 읽을 수 있도록 최적화했습니다.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🔥 핵심 구현 기능
 
-## Expanding the ESLint configuration
+### 1. 컴포넌트 주도 개발 기법 기반의 코드 최적화
+- **`Header`와 `LoginButton` 분리**: 내비게이션 바 본연의 레이아웃 역할과 복잡한 인증(Auth) 로직을 분리하여 의존성을 최소화했습니다.
+- **`LoginInput` 공통 컴포넌트화**: 아이디와 비밀번호 입력창의 중복 스타일 및 마크업 코드를 하나의 공통 UI 요소로 통합해 선언적으로 제어합니다.
+- **`Menu` 컴포넌트 데이터화**: 상단 카테고리 메뉴를 설정 객체 배열(`MENU_ITEMS`)로 데이터화하고 `map` 함수로 순회 렌더링하여 향후 카테고리 확장이 매우 간편합니다.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 2. URL 쿼리 스트링 기반의 동적 탭 필터링
+- 메인 화면에서 각 메뉴(트렌딩, 추천, 최신, 피드)를 누르면 `useSearchParams`를 통해 URL 주소가 `/?tab=...` 형태로 우아하게 전환됩니다.
+- **트렌딩**: 좋아요(`like`)가 가장 많은 인기 순 정렬
+- **추천**: 댓글(`replyCount`)이 가장 많이 달린 피드 순 정렬
+- **최신**: 가장 최근에 등록된 데이터(`id` 역순) 정렬
+
+### 3. 클라이언트 사이드 더미 데이터 로그인 시스템
+- `profile.json`에 기술된 더미 계정 배열 데이터(`username`, `password`)를 기반으로 입력값을 실시간 검증합니다.
+- 로그인 성공 시 웹 표준인 `localStorage`에 유저 세션을 직렬화하여 영구 보존하므로 새로고침해도 로그인 상태가 유지됩니다.
+- 로그인 상태에 따라 헤더의 버튼이 **[로그인] ↔ [로그아웃 (소프트 레드 톤)]**으로 다이내믹하게 변경되며, 매핑된 유저 프로필 사진을 클릭하면 각 유저 고유 ID의 마이페이지(`/mypage/:id`)로 즉시 라우팅됩니다.
+
+### 4. 컴팩트 인풋형 댓글 시스템
+- 본문 가독성을 해치지 않도록 슬림하고 깔끔한 인풋 폼 형태로 댓글 작성을 유도합니다.
+- 입력창에 포커싱(`:focus`)될 때 민트 그린 라인과 은은한 광채 효과가 켜지는 마이크로 인터랙션을 가미했습니다.
+
+---
+
+## 📂 프로젝트 구조 (Directory Structure)
+
+```text
+src/
+├── assets/             # 정적 이미지 및 에셋 파일
+├── component/
+│   ├── list/
+│   │   ├── CommentList.jsx       # 댓글 리스트 컨테이너
+│   │   ├── CommentListItem.jsx   # 개별 댓글 아이템
+│   │   ├── PostList.jsx          # 메인 게시글 그리드 컨테이너
+│   │   └── PostListItem.jsx      # 메인 게시글 개별 카드 (Hover 애니메이션 적용)
+│   ├── page/
+│   │   ├── Header.jsx            # 상단 고정식(Sticky) 내비게이션 GNB
+│   │   ├── Footer.jsx            # 하단 카피라이트 및 유틸리티 영역
+│   │   ├── MainPage.jsx          # 정렬 알고리즘이 내장된 대시보드 홈
+│   │   ├── LoginPage.jsx         # 계정 검증 시스템이 내장된 로그인 페이지
+│   │   ├── MyPage.jsx            # 유저별 소개 및 프로필 마이페이지
+│   │   ├── PostViewPage.jsx      # 상세 본문 내용 및 댓글 폼 아티클 페이지
+│   │   └── PostWritePage.jsx     # 새 기술 블로그 글 작성 페이지
+│   └── ui/
+│       ├── Button.jsx            # 공통 캡슐형 버튼 (Solid / Stroke 테마)
+│       ├── LoginButton.jsx       # 헤더 내 로그인/로그아웃 스위칭 및 세션 판별 컴포넌트
+│       ├── LoginInput.jsx        # 라벨-인풋 페어 공통 컴포넌트
+│       ├── Menu.jsx              # 카테고리 탭용 공통 메뉴 컴포넌트
+│       ├── Profile.jsx           # 작성자 카드 및 프로필 오버레이 컴포넌트
+│       ├── QuillEditor.jsx       # 에디터 인프라 컴포넌트
+│       └── TextInput.jsx         # 본문용 입력창 컴포넌트
+├── data.json           # 게시글 및 댓글 mock 데이터
+├── profile.json        # 인증용 아이디/비밀번호가 내장된 에디터 프로필 mock 데이터
+├── index.css           # 글로벌 스크롤바 커스텀 및 공통 서체 시스템 설정
+├── main.jsx            # 애플리케이션 진입점 및 라우터 주입
+└── App.jsx             # 전체 레이아웃 구조 정의
+
+---
+
+🛠️ 기술 스택 (Tech Stack)
+Library: React (v18+)
+
+Routing: React Router Dom
+
+Styling: Styled-Components
+
+Icons: React Icons
+
+Bundler: Vite
+
+---
+
+📝 작성자 정보
+개발자: 성윤수 (컴퓨터소프트웨어과)
