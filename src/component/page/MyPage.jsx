@@ -9,19 +9,26 @@ import postData from "../../data.json";
 import profileData from "../../profile.json";
 
 const Wrapper = styled.div`
-    padding: 16px;
-    width: calc(100% - 32px);
+    width: 100%;
+    /* MainPage와 동일하게 최대 너비를 1200px로 줄여 양옆 사이드 여백 확보 */
+    max-width: 1200px; 
+    /* 상하 여백 40px, 좌우 여백 30px로 일치시켜 모든 화면 규격 동기화 */
+    padding: 40px 30px; 
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    /* 브라우저 중앙 정렬 */
+    margin: 0 auto;
 `;
 
 const Container = styled.div`
     width: 100%;
-    max-width: 1540px;
-    display: flex;
-    flex-direction: column;
+    max-width: 100%; /* 부모인 Wrapper의 1200px 규격을 그대로 따름 */
+    & > * {
+        :not(:last-child) {
+            margin-bottom: 20px;
+        }
+    }
 `;
 
 const ProfileSection = styled.div`

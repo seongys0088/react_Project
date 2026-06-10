@@ -12,31 +12,34 @@ import { MdOutlineRssFeed } from "react-icons/md";
 
 
 // 스타일
+// 전체 영역 (배경색과 밑줄은 브라우저 끝까지 채워짐)
 const Wrapper = styled.div`
     width: 100%;
+    background-color: whitesmoke;
     border-bottom: 1px solid #e9ecef;
+
+    /* 세로 정렬을 위한 핵심 변경 사항 */
     display: flex;
-    flex-direction: column;
-    align-items: center; 
+    flex-direction: column;   /* 아이템들을 세로로 정렬 */
+    align-items: center;      /* 세로 정렬 시 아이템들을 가로축 가운데로 정렬 */
 `;
 
+// 실질적인 콘텐츠가 들어가는 공간 (MainPage 규격과 동기화)
 const Container = styled.div`
+    width: 100%;
+    max-width: 1200px; /* MainPage와 동일하게 맞춤 */
+    padding: 20px 30px; /* 좌우 패딩을 30px로 동일하게 맞춤 */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    width: 100%;
-    max-width: 1540px; 
 `;
 
 const MainTitle = styled.a`
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: bold;
     text-align: center;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    text-decoration: none;
-    color: black;
+    cursor: pointer;
+    margin: 0 16px;
 `;
 
 const User = styled.div`
