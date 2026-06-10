@@ -1,127 +1,157 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "../ui/Button";
 
 // icon
-import { FaRegBell } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
-import { MdOutlineTrendingUp } from "react-icons/md";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
+import { MdOutlineTrendingUp, MdOutlineRssFeed } from "react-icons/md";
 import { IoMdTime } from "react-icons/io";
-import { MdOutlineRssFeed } from "react-icons/md";
 
-
-// 스타일
-// 전체 영역 (배경색과 밑줄은 브라우저 끝까지 채워짐)
-const Wrapper = styled.div`
+const Wrapper = styled.header`
     width: 100%;
-    background-color: whitesmoke;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid #e9ecef;
-
-    /* 세로 정렬을 위한 핵심 변경 사항 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     display: flex;
-    flex-direction: column;   /* 아이템들을 세로로 정렬 */
-    align-items: center;      /* 세로 정렬 시 아이템들을 가로축 가운데로 정렬 */
+    flex-direction: column;
+    align-items: center;
 `;
 
-// 실질적인 콘텐츠가 들어가는 공간 (MainPage 규격과 동기화)
-const Container = styled.div`
+const TopContainer = styled.div`
     width: 100%;
-    max-width: 1200px; /* MainPage와 동일하게 맞춤 */
-    padding: 20px 30px; /* 좌우 패딩을 30px로 동일하게 맞춤 */
+    max-width: 1200px;
+    padding: 16px 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 `;
 
 const MainTitle = styled.a`
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 16px;
+    font-family: 'Fira Mono', monospace, sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #212529;
+    letter-spacing: -1px;
+    
+    span {
+        color: #12b886;
+    }
 `;
 
-const User = styled.div`
+const UserNav = styled.div`
     display: flex; 
-    flex-direction: row;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 `;
 
-const Icon = styled.a`
-    text-decoration: none;
-    color: black;
-`;
-
-const Bell = styled(FaRegBell)`
-    font-size: 24px;
-`;
-
-const Search = styled(FaSearch)`
-    font-size: 24px;
-`;
-
-const Login = styled.a`
-    width: 80px;
-    height: 32px;
-    border: 1px solid black;
-    border-radius: 15px;
-    background-color: black;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-`;
-
-const MenuBar = styled.div`
+const IconButton = styled.a`
+    color: #495057;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    font-size: 20px;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #212529;
+    }
+`;
+
+const LoginButton = styled.a`
+    padding: 6px 16px;
+    border-radius: 16px;
+    background-color: #212529;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #495057;
+    }
+`;
+
+const SubContainer = styled.div`
+    width: 100%;
+    max-width: 1200px;
+    padding: 0px 24px 8px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const MenuBar = styled.nav`
+    display: flex;
+    align-items: center;
+    gap: 8px;
 `;
 
 const Menu = styled.a`
-    font-size: 24px;
-    font-weight: bold;
-    text-align: left;
-    margin-left: 15px;
-    text-decoration: none;
-    color: black;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #868e96;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &.active, &:hover {
+        color: #212529;
+        background-color: #f1f3f5;
+    }
+
+    svg {
+        font-size: 18px;
+    }
 `;
 
-const Filter = styled.div`
+const FilterSelect = styled.select`
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #495057;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
 
+    &:focus {
+        border-color: #12b886;
+    }
 `;
 
 function Header() {
     return (
         <Wrapper>
-            <Container>
-                <MainTitle href="http://localhost:5173/">Welog</MainTitle>
-                <User>
-                    <Icon href=""><Bell /></Icon>
-                    <Icon href=""><Search /></Icon>
-                    <Login href="">로그인</Login>
-                </User>
-            </Container>
-            <Container>
+            <TopContainer>
+                <MainTitle href="http://localhost:5173/">We<span>log</span></MainTitle>
+                <UserNav>
+                    <IconButton href=""><FaSearch /></IconButton>
+                    <IconButton href=""><FaRegBell /></IconButton>
+                    <LoginButton href="">로그인</LoginButton>
+                </UserNav>
+            </TopContainer>
+            <SubContainer>
                 <MenuBar>
-                    <Menu href=""><MdOutlineTrendingUp /> 트렌딩</Menu>
+                    <Menu href="" className="active"><MdOutlineTrendingUp /> 트렌딩</Menu>
                     <Menu href=""><FaRegStar /> 추천</Menu>
                     <Menu href=""><IoMdTime /> 최신</Menu>
                     <Menu href=""><MdOutlineRssFeed /> 피드</Menu>
                 </MenuBar>
-                <Filter>
+                <div>
                     <form>
-                        <select>
-                        <option>오늘</option>
-                        <option>이번 주</option>
-                        <option>이번 달</option>
-                        </select>
+                        <FilterSelect>
+                            <option>오늘</option>
+                            <option>이번 주</option>
+                            <option>이번 달</option>
+                        </FilterSelect>
                     </form>
-                </Filter>
-            </Container>
+                </div>
+            </SubContainer>
         </Wrapper>
     );
 };

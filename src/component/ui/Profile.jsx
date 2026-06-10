@@ -1,50 +1,48 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import profileData from "../../profile.json";
 
 const ProfileWrapper = styled.div`
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     cursor: pointer;
-    padding: 8px;
-    border-radius: 8px;
-    transition: background 0.2s ease-in-out;
-
-    &:hover {
-        background-color: #f5f5f5; 
-    }
 `;
 
 const ProfileImg = styled.img`
-    width: ${(props) => props.size || "40px"};
-    height: ${(props) => props.size || "40px"};
+    width: ${(props) => props.size || "32px"};
+    height: ${(props) => props.size || "32px"};
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid #ddd;
+    border: 1px solid #e9ecef;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
 const UserName = styled.span`
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+    font-size: 12px;
+    font-weight: 400;
+    color: #868e96;
+    
+    strong {
+        color: #212529;
+        font-weight: 600;
+        margin-left: 2px;
+    }
 `;
 
 function Profile({ user, size, hideName }) {
     const navigate = useNavigate();
-    
     if (!user) return null;
 
-    const matchedProfile = profileData.find(
-        (profile) => profile.name === user.writer
-    );
-
+    const matchedProfile = profileData.find((profile) => profile.name === user.writer);
     if (!matchedProfile) return null;
 
     const onClickProfile = (e) => {
-        // 💡 게시글 카드 전체 클릭 이벤트가 동시에 터지는 버블링 현상 방지
         e.stopPropagation(); 
         navigate(`/mypage/${matchedProfile.id}`); 
     };
@@ -53,10 +51,10 @@ function Profile({ user, size, hideName }) {
         <ProfileWrapper onClick={onClickProfile}>
             <ProfileImg 
                 src={`/img/profileImg/${matchedProfile.profileImg}`} 
-                alt={`${user.writer}의 프로필`} 
+                alt={`${user.writer}`} 
                 size={size} 
             />
-            {!hideName && <UserName>by {user.writer}</UserName>}
+            {!hideName && <UserName>by <strong>{user.writer}</strong></UserName>}
         </ProfileWrapper>
     );
 }
