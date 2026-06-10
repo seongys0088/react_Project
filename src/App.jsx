@@ -9,6 +9,7 @@ import MainPage from './component/page/MainPage';
 import PostWritePage from './component/page/PostWritePage';
 import PostViewPage from './component/page/PostViewPage';
 import MyPage from './component/page/MyPage';
+import LoginPage from "./component/page/LoginPage";
 import Footer from './component/page/Footer';
 
 const Layout = styled.div`
@@ -33,6 +34,7 @@ function App(props) {
               <Route path="post-write" element={<PostWritePage />} />
               <Route path="post/:postId" element={<PostViewPage />} />
               <Route path="mypage/:profileId" element={<MyPage />} />
+              <Route path="login" element={<LoginPage />} />
           </Routes>
         </Main>
         <Footer />

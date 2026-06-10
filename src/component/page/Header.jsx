@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import LoginButton from "../ui/LoginButton"; // 1. 분리된 로그인 버튼 임포트
 
 // icon
 import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
@@ -34,6 +36,7 @@ const MainTitle = styled.a`
     font-weight: 800;
     color: #212529;
     letter-spacing: -1px;
+    cursor: pointer;
     
     span {
         color: #12b886;
@@ -52,23 +55,10 @@ const IconButton = styled.a`
     align-items: center;
     font-size: 20px;
     transition: color 0.2s;
+    cursor: pointer;
 
     &:hover {
         color: #212529;
-    }
-`;
-
-const LoginButton = styled.a`
-    padding: 6px 16px;
-    border-radius: 16px;
-    background-color: #212529;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    transition: background-color 0.2s;
-
-    &:hover {
-        background-color: #495057;
     }
 `;
 
@@ -97,6 +87,7 @@ const Menu = styled.a`
     padding: 8px 12px;
     border-radius: 8px;
     transition: all 0.2s;
+    cursor: pointer;
 
     &.active, &:hover {
         color: #212529;
@@ -125,22 +116,27 @@ const FilterSelect = styled.select`
 `;
 
 function Header() {
+    const navigate = useNavigate();
+
     return (
         <Wrapper>
             <TopContainer>
-                <MainTitle href="http://localhost:5173/">We<span>log</span></MainTitle>
+                <MainTitle onClick={() => navigate("/")}>We<span>log</span></MainTitle>
                 <UserNav>
-                    <IconButton href=""><FaSearch /></IconButton>
-                    <IconButton href=""><FaRegBell /></IconButton>
-                    <LoginButton href="">로그인</LoginButton>
+                    <IconButton><FaSearch /></IconButton>
+                    <IconButton><FaRegBell /></IconButton>
+                    
+                    {/* 2. 복잡한 인증 로직과 UI가 내포된 독립 컴포넌트 배치 */}
+                    <LoginButton />
                 </UserNav>
             </TopContainer>
+            
             <SubContainer>
                 <MenuBar>
-                    <Menu href="" className="active"><MdOutlineTrendingUp /> 트렌딩</Menu>
-                    <Menu href=""><FaRegStar /> 추천</Menu>
-                    <Menu href=""><IoMdTime /> 최신</Menu>
-                    <Menu href=""><MdOutlineRssFeed /> 피드</Menu>
+                    <Menu className="active"><MdOutlineTrendingUp /> 트렌딩</Menu>
+                    <Menu><FaRegStar /> 추천</Menu>
+                    <Menu><IoMdTime /> 최신</Menu>
+                    <Menu><MdOutlineRssFeed /> 피드</Menu>
                 </MenuBar>
                 <div>
                     <form>

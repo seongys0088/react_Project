@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import CommentList from "../list/CommentList";
-import QuillEditor from "../ui/QuillEditor";
 import Button from "../ui/Button";
 import data from "../../data.json";
 
@@ -65,19 +64,39 @@ const CommentLabel = styled.h3`
     font-size: 18px;
     font-weight: 700;
     color: #212529;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 `;
 
-const CommentWriteContainer = styled.div`
+/* ─── Velog 스타일 슬림 인풋 폼 디자인 ─── */
+const CommentForm = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: flex-end; 
+    align-items: flex-end;
     gap: 12px;
-    margin-bottom: 32px;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    background: #f8f9fa;
-    padding: 12px;
+    margin-bottom: 40px;
+`;
+
+const StyledCommentInput = styled.input`
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 15px;
+    color: #212529;
+    background-color: #f8f9fa;
+    border: 1px solid #f1f3f5;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+
+    &::placeholder {
+        color: #adb5bd;
+    }
+
+    /* 포커스 되었을 때 Velog의 상징인 민트 그린 라인과 미세한 광채 연출 */
+    &:focus {
+        background-color: #ffffff;
+        border-color: #12b886;
+        box-shadow: 0 0 0 3px rgba(18, 184, 134, 0.05);
+    }
 `;
 
 const BottomActionContainer = styled.div`
@@ -91,6 +110,8 @@ function PostViewPage() {
     const { postId } = useParams();
 
     const post = data.find((item) => item.id == postId);
+    
+    // 로직 보존: 기존의 string 상태 그대로 유지
     const [comment, setComment] = useState("");
 
     if (!post) {
@@ -113,23 +134,28 @@ function PostViewPage() {
                 
                 <Divider />
 
+                {/* 댓글 섹션 */}
                 <section>
                     <CommentLabel>{post.comments ? post.comments.length : 0}개의 댓글</CommentLabel>
-                    <CommentWriteContainer>
-                        <QuillEditor
+                    
+                    <CommentForm>
+                        {/* 깔끔한 단일 input 창으로 교체 및 value, onChange 로직 매핑 */}
+                        <StyledCommentInput
+                            type="text"
                             value={comment}
-                            onChange={setComment}
+                            onChange={(e) => setComment(e.target.value)}
                             placeholder="댓글을 작성하세요..."
-                            height="100px" 
                         />
                         <Button
                             title="댓글 작성"
                             onClick={() => {
+                                // 로직 보존: 기존 콘솔 출력 및 초기화 흐름 유지
                                 console.log("저장될 댓글 데이터:", comment);
                                 setComment(""); 
                             }}
                         />
-                    </CommentWriteContainer>
+                    </CommentForm>
+                    
                     <CommentList comments={post.comments || []} />
                 </section>
 

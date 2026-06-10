@@ -1,6 +1,8 @@
 [
     {
         "id": 101,
+        "username": "111",
+        "password": "111",
         "profileImg": "피카츄.jpg",
         "name": "피카츄",
         "sub": "프론트엔드 개발 3년차입니다.",
@@ -8,6 +10,8 @@
     },
     {
         "id": 102,
+        "username": "222",
+        "password": "222",
         "profileImg": "파이리.jpg",
         "name": "파이리",
         "sub": "함수형 프로그래밍과 React Hooks를 사랑하는 개발자",
@@ -15,6 +19,8 @@
     },
     {
         "id": 103,
+        "username": "333",
+        "password": "333",
         "profileImg": "꼬부기.jpg",
         "name": "꼬부기",
         "sub": "깔끔한 UI/UX를 고민합니다.",
@@ -22,6 +28,8 @@
     },
     {
         "id": 104,
+        "username": "444",
+        "password": "444",
         "profileImg": "이상해씨.jpg",
         "name": "이상해씨",
         "sub": "CSS 장인을 꿈꾸며 퍼블리싱을 즐깁니다.",
@@ -29,6 +37,8 @@
     },
     {
         "id": 105,
+        "username": "555",
+        "password": "555",
         "profileImg": "야돈.jpg",
         "name": "야돈",
         "sub": "SPA 라우팅과 상태 관리에 관심이 많습니다.",
