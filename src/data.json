@@ -3,132 +3,87 @@
         "id": 5,
         "img": "1.jpg",
         "title": "리액트에서 리스트 렌더링하기",
-        "content": "안녕하세요, 소플입니다.\n이번 글에서는 리액트에서 리스트를 렌더링하는 방법에 대해서 배워보겠습니다.\n리스트를 렌더링하기 위해서는 자바스크립트 배열에서 제공하는 map함수를 사용합니다.",
+        "content": "안녕하세요, 소플입니다.\n이번 글에서는 리액트에서 리스트를 렌더링하는 방법에 대해서 배워보겠습니다.\n리스트를 렌더링하기 위해서는 자바스크립트 배열에서 제공하는 map함수를 사용합니다.\n중요한 점은 고유한 key props를 전달하여 버추얼 돔이 변경사항을 빠르게 추적할 수 있도록 돕는 것입니다.",
         "writer": "피카츄",
         "date": "2026년 6월 5일",
         "replyCount": 5,
         "like": 18,
         "comments": [
-            {
-                "id": 11,
-                "writer": "파이리",
-                "commentDate": "2026년 6월 5일",
-                "content": "실제로 개발하다보면 map함수를 진짜 많이 쓰는 것 같아요😄"
-            },
-            {
-                "id": 12,
-                "writer": "꼬부기",
-                "commentDate": "2026년 6월 6일",
-                "content": "적용해보니 코드가 정말 간결해지네요ㅎㅎ"
-            },
-            {
-                "id": 13,
-                "writer": "야돈",
-                "commentDate": "2026년 6월 6일",
-                "content": "key를 꼭 넣어줘야 하는군요~"
-            },
-            {
-                "id": 14,
-                "writer": "이상해씨",
-                "commentDate": "2026년 6월 7일",
-                "content": "생산성이 확 올라가는 느낌입니다ㅋㅋ"
-            },
-            {
-                "id": 15,
-                "writer": "이상해씨",
-                "commentDate": "2026년 6월 7일",
-                "content": "오늘도 좋은 글 감사합니다!👍"
-            }
+            { "id": 11, "writer": "파이리", "commentDate": "2026년 6월 5일", "content": "실제로 개발하다보면 map함수를 진짜 많이 쓰는 것 같아요😄" },
+            { "id": 12, "writer": "꼬부기", "commentDate": "2026년 6월 6일", "content": "적용해보니 코드가 정말 간결해지네요ㅎㅎ" },
+            { "id": 13, "writer": "야돈", "commentDate": "2026년 6월 6일", "content": "key를 꼭 넣어줘야 하는군요~" },
+            { "id": 14, "writer": "이상해씨", "commentDate": "2026년 6월 7일", "content": "생산성이 확 올라가는 느낌입니다ㅋㅋ" },
+            { "id": 15, "writer": "이상해씨", "commentDate": "2026년 6월 7일", "content": "오늘도 좋은 글 감사합니다!👍" }
         ]
     },
     {
         "id": 4,
         "img": "4.jpg",
         "title": "React Hooks 완벽 가이드",
-        "content": "클래스형 컴포넌트에서 벗어나 함수형 컴포넌트와 Hooks를 사용하는 방법을 알아봅니다.\nuseState와 useEffect만 잘 써도 웬만한 기능은 다 만들 수 있어요.",
+        "content": "클래스형 컴포넌트에서 벗어나 함수형 컴포넌트와 Hooks를 사용하는 방법을 알아봅니다.\nuseState와 useEffect만 잘 써도 웬만한 기능은 다 만들 수 있어요.\n클로저 메커니즘을 이해하고 상태가 유지되는 원리를 깨달으면 Hook을 마스터할 수 있습니다.",
         "writer": "이상해씨",
         "date": "2026년 6월 4일",
         "replyCount": 2,
         "like": 9,
         "comments": [
-            {
-                "id": 21,
-                "writer": "피카츄",
-                "commentDate": "2026년 6월 4일",
-                "content": "useEffect 의존성 배열 헷갈렸는데 감사합니다!"
-            },
-            {
-                "id": 22,
-                "writer": "꼬부기",
-                "commentDate": "2026년 6월 5일",
-                "content": "커스텀 훅 만드는 법도 다뤄주시면 좋겠어요."
-            }
+            { "id": 21, "writer": "피카츄", "commentDate": "2026년 6월 4일", "content": "useEffect 의존성 배열 헷갈렸는데 감사합니다!" },
+            { "id": 22, "writer": "꼬부기", "commentDate": "2026년 6월 5일", "content": "커스텀 훅 만드는 법도 다뤄주시면 좋겠어요." }
         ]
     },
     {
         "id": 3,
         "img": "3.jpg",
         "title": "Styled-components 100% 활용하기",
-        "content": "자바스크립트 파일 안에 CSS를 작성할 수 있게 해주는 라이브러리입니다.\n컴포넌트 단위로 스타일을 관리할 수 있어서 유지보수가 정말 편해집니다.",
+        "content": "자바스크립트 파일 안에 CSS를 작성할 수 있게 해주는 라이브러리입니다.\n컴포넌트 단위로 스타일을 관리할 수 있어서 유지보수가 정말 편해집니다.\n동적 스타일링이나 테마 전환(ThemeProvider)을 처리할 때 강력한 생산성을 보여줍니다.",
         "writer": "파이리",
         "date": "2026년 6월 3일",
         "replyCount": 1,
         "like": 14,
         "comments": [
-            {
-                "id": 31,
-                "writer": "야돈",
-                "commentDate": "2026년 6월 7일",
-                "content": "props로 스타일 넘기는 거 너무 신기해요."
-            }
+            { "id": 31, "writer": "야돈", "commentDate": "2026년 6월 7일", "content": "props로 스타일 넘기는 거 너무 신기해요." }
         ]
     },
     {
         "id": 2,
         "img": "2.jpg",
         "title": "CSS Grid로 완벽한 레이아웃 만들기",
-        "content": "2차원 레이아웃을 구성할 때는 CSS Grid만한 게 없죠.\ngrid-template-columns와 gap 속성만 알아도 복잡한 UI를 쉽게 구현할 수 있습니다.",
+        "content": "2차원 레이아웃을 구성할 때는 CSS Grid만한 게 없죠.\ngrid-template-columns와 gap 속성만 알아도 복잡한 UI를 쉽게 구현할 수 있습니다.\nFlexbox와의 차이점을 명확히 파악하고 적재적소에 배치해 컴포넌트 깨짐을 최소화해 보세요.",
         "writer": "꼬부기",
         "date": "2026년 6월 2일",
         "replyCount": 2,
         "like": 11,
         "comments": [
-            {
-                "id": 41,
-                "writer": "파이리",
-                "commentDate": "2026년 6월 4일",
-                "content": "마진 대신 gap 쓰는 꿀팁 얻어갑니다!!"
-            },
-            {
-                "id": 42,
-                "writer": "이상해씨",
-                "commentDate": "2026년 6월 5일",
-                "content": "정렬할 때 place-items 정말 유용하네요."
-            }
+            { "id": 41, "writer": "파이리", "commentDate": "2026년 6월 4일", "content": "마진 대신 gap 쓰는 꿀팁 얻어갑니다!!" },
+            { "id": 42, "writer": "이상해씨", "commentDate": "2026년 6월 5일", "content": "정렬할 때 place-items 정말 유용하네요." }
         ]
     },
     {
         "id": 1,
         "img": "5.jpg",
         "title": "React Router로 SPA 라우팅하기",
-        "content": "리액트는 싱글 페이지 애플리케이션(SPA)이므로 라우터가 필수입니다.\nReact Router DOM을 설치하고 기본적인 라우팅 설정을 해봅시다.",
+        "content": "리액트는 싱글 페이지 애플리케이션(SPA)이므로 라우터가 필수입니다.\nReact Router DOM을 설치하고 기본적인 라우팅 설정을 해봅시다.\nNested Routes(중첩 라우팅)를 설계하여 페이지 내 일부분만 매끄럽게 교체하는 고급 기법까지 다뤄봅니다.",
         "writer": "야돈",
         "date": "2026년 6월 1일",
         "replyCount": 2,
         "like": 21,
         "comments": [
-            {
-                "id": 51,
-                "writer": "피카츄",
-                "commentDate": "2026년 6월 1일",
-                "content": "V6로 넘어가면서 바뀐 점도 잘 정리해주셨네요."
-            },
-            {
-                "id": 52,
-                "writer": "파이리",
-                "commentDate": "2026년 6월 2일",
-                "content": "Link 태그랑 a 태그 차이점 이제야 확실히 알았어요."
-            }
+            { "id": 51, "writer": "피카츄", "commentDate": "2026년 6월 1일", "content": "V6로 넘어가면서 바뀐 점도 잘 정리해주셨네요." },
+            { "id": 52, "writer": "파이리", "commentDate": "2026년 6월 2일", "content": "Link 태그랑 a 태그 차이점 이제야 확실히 알았어요." }
+        ]
+    },
+    {
+        "id": 0,
+        "img": "3.jpg",
+        "title": "웹 프론트엔드 최적화 비법서",
+        "content": "Meta와 같은 글로벌 IT 기업들이 대용량 트래픽 속에서 웹의 로딩 속도를 유지하는 방법을 공개합니다.\n코드 스플리팅(Code Splitting)부터 리액트 컴포넌트 메모이제이션(useMemo, useCallback)을 적용해 60fps 인터랙션을 유지해 봅시다.",
+        "writer": "피카츄",
+        "date": "2026년 5월 28일",
+        "replyCount": 3,
+        "like": 45,
+        "comments": [
+            { "id": 61, "writer": "이상해씨", "commentDate": "2026년 5월 28일", "content": "시니어 개발자님의 깊이 있는 노하우네요." },
+            { "id": 62, "writer": "야돈", "commentDate": "2026년 5월 29일", "content": "메모이제이션을 남용하면 오히려 독이 된다는 사실을 배웠습니다." },
+            { "id": 63, "writer": "꼬부기", "commentDate": "2026년 5월 30일", "content": "Lighthouse 점수 올리러 가야겠어요!" }
         ]
     }
 ]
