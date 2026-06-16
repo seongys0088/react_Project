@@ -40,11 +40,11 @@ function MainPage() {
     let sortedPosts = [...data];
 
     if (currentTab === "trending") {
-        // 좋아요(like)가 높은 순으로 정렬
-        sortedPosts.sort((a, b) => (b.like || 0) - (a.like || 0));
-    } else if (currentTab === "recommended") {
         // 댓글(replyCount) 개수가 많은 순으로 정렬
         sortedPosts.sort((a, b) => (b.replyCount || 0) - (a.replyCount || 0));
+    } else if (currentTab === "recommended") {
+        // 좋아요(like)가 높은 순으로 정렬
+        sortedPosts.sort((a, b) => (b.like || 0) - (a.like || 0));
     } else if (currentTab === "latest") {
         // 최신 등록 데이터 순
         sortedPosts.sort((a, b) => b.id - a.id);
