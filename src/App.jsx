@@ -10,6 +10,7 @@ import PostWritePage from './component/page/PostWritePage';
 import PostViewPage from './component/page/PostViewPage';
 import MyPage from './component/page/MyPage';
 import LoginPage from "./component/page/LoginPage";
+import Sidebar from './component/ui/Sidebar';
 import Footer from './component/page/Footer';
 
 const Layout = styled.div`
@@ -37,6 +38,7 @@ function App(props) {
               <Route path="login" element={<LoginPage />} />
           </Routes>
         </Main>
+        <Sidebar />
         <Footer />
       </Layout>
     </BrowserRouter>
