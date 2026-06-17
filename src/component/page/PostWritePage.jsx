@@ -66,7 +66,7 @@ function PostWritePage(props) {
                 <QuillEditor
                     value={content}
                     onChange={setContent}
-                    placeholder="당신의 이야기를 적어보세요..."
+                    placeholder="당신의 기술을 적어보세요..."
                 />
 
                 <ButtonContainer>

@@ -26,13 +26,13 @@ const ThemeContext = createContext();
 export function ThemeProvider({ children }) {
     // 사용자의 기존 설정이나 OS 설정을 반영
     const [isDarkMode, setIsDarkMode] = useState(() => {
-        const savedTheme = localStorage.getItem('welog-theme');
+        const savedTheme = localStorage.getItem('DevSquare-theme');
         if (savedTheme) return savedTheme === 'dark';
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
     });
 
     useEffect(() => {
-        localStorage.setItem('welog-theme', isDarkMode ? 'dark' : 'light');
+        localStorage.setItem('DevSquare-theme', isDarkMode ? 'dark' : 'light');
     }, [isDarkMode]);
 
     const toggleTheme = () => setIsDarkMode(prev => !prev);
