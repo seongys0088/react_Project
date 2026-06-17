@@ -9,7 +9,8 @@ const Wrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #ffffff;
+    background-color: ${props => props.theme.cardBody};
+    transition: background-color 0.25s ease;
 `;
 
 const Container = styled.div`
@@ -21,7 +22,7 @@ const Container = styled.div`
 const TitleText = styled.h1`
     font-size: 40px;
     font-weight: 800;
-    color: #212529;
+    color: ${props => props.theme.text};
     line-height: 1.3;
     letter-spacing: -1.5px;
     margin-bottom: 24px;
@@ -32,22 +33,21 @@ const PostInfo = styled.div`
     align-items: center;
     gap: 12px;
     font-size: 15px;
-    color: #495057;
+    color: ${props => props.theme.secondaryText};
     margin-bottom: 48px;
 
     .writer {
         font-weight: 700;
-        color: #212529;
+        color: ${props => props.theme.text};
     }
     .divider {
-        color: #ced4da;
-    }
+        color: ${props => props.theme.border};
 `;
 
 const ContentContainer = styled.article`
     font-size: 18px;
     line-height: 1.8;
-    color: #212529;
+    color: ${props => props.theme.text};
     white-space: pre-wrap;
     margin-bottom: 60px;
     letter-spacing: -0.2px;
@@ -67,7 +67,6 @@ const CommentLabel = styled.h3`
     margin-bottom: 24px;
 `;
 
-/* ─── Velog 스타일 슬림 인풋 폼 디자인 ─── */
 const CommentForm = styled.div`
     display: flex;
     flex-direction: column;
@@ -80,22 +79,21 @@ const StyledCommentInput = styled.input`
     width: 100%;
     padding: 16px 20px;
     font-size: 15px;
-    color: #212529;
-    background-color: #f8f9fa;
-    border: 1px solid #f1f3f5;
+    color: ${props => props.theme.text};
+    background-color: ${props => props.theme.body};
+    border: 1px solid ${props => props.theme.border};
     border-radius: 12px;
     outline: none;
     transition: all 0.2s ease-in-out;
 
     &::placeholder {
-        color: #adb5bd;
+        color: ${props => props.theme.secondaryText};
     }
 
-    /* 포커스 되었을 때 Velog의 상징인 민트 그린 라인과 미세한 광채 연출 */
     &:focus {
-        background-color: #ffffff;
-        border-color: #12b886;
-        box-shadow: 0 0 0 3px rgba(18, 184, 134, 0.05);
+        background-color: ${props => props.theme.cardBody};
+        border-color: ${props => props.theme.primary};
+        box-shadow: 0 0 0 3px rgba(18, 184, 134, 0.1);
     }
 `;
 
@@ -111,7 +109,6 @@ function PostViewPage() {
 
     const post = data.find((item) => item.id == postId);
     
-    // 로직 보존: 기존의 string 상태 그대로 유지
     const [comment, setComment] = useState("");
 
     if (!post) {

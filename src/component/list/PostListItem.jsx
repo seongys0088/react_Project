@@ -10,18 +10,18 @@ const truncateText = (text, maxLength) => {
 };
 
 const Wrapper = styled.div`
-    background: #ffffff;
+    background: ${props => props.theme.cardBody};
     border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: ${props => props.theme.body === '#121212' ? '0 4px 16px rgba(0, 0, 0, 0.5)' : '0 4px 16px rgba(0, 0, 0, 0.04)'};
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, background-color 0.25s ease;
     height: 380px;
 
     &:hover {
         transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        box-shadow: ${props => props.theme.body === '#121212' ? '0 12px 24px rgba(0, 0, 0, 0.6)' : '0 12px 24px rgba(0, 0, 0, 0.08)'};
     }
 `;
 
@@ -54,14 +54,14 @@ const TextContainer = styled.div`
 const TitleText = styled.h4`
     font-size: 16px;
     font-weight: 700;
-    color: #212529;
+    color: ${props => props.theme.text};
     margin-bottom: 6px;
     line-height: 1.4;
 `;
     
 const SubText = styled.p`
     font-size: 13px;
-    color: #495057;
+    color: ${props => props.theme.secondaryText};
     line-height: 1.5;
     margin-bottom: 8px;
 `;
@@ -77,8 +77,9 @@ const Footer = styled.div`
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    border-top: 1px solid #f8f9fa; 
-    background-color: #ffffff;
+    border-top: 1px solid ${props => props.theme.border};
+    background-color: ${props => props.theme.cardBody};
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 `;
 
 const Like = styled.div`
@@ -87,11 +88,7 @@ const Like = styled.div`
     gap: 4px;
     font-size: 12px;
     font-weight: 600;
-    color: #495057;
-    
-    svg {
-        font-size: 16px;
-    }
+    color: ${props => props.theme.secondaryText};
 `;
 
 function PostListItem(props) {

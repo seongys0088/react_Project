@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginButton from "../ui/LoginButton";
-import Menu from "../ui/Menu"; // 1. 분리한 Menu 컴포넌트 임포트
+import Menu from "../ui/Menu";
 
 // icon
 import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
@@ -11,15 +11,16 @@ import { IoMdTime } from "react-icons/io";
 
 const Wrapper = styled.header`
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: ${props => props.theme.body === '#121212' ? 'rgba(18, 18, 18, 0.9)' : 'rgba(255, 255, 255, 0.9)'};
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid #e9ecef;
+    border-bottom: 1px solid ${props => props.theme.border};
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 `;
 
 const TopContainer = styled.div`
@@ -35,12 +36,12 @@ const MainTitle = styled.a`
     font-family: 'Fira Mono', monospace, sans-serif;
     font-size: 26px;
     font-weight: 800;
-    color: #212529;
+    color: ${props => props.theme.text};
     letter-spacing: -1px;
     cursor: pointer;
     
     span {
-        color: #12b886;
+        color: ${props => props.theme.primary};
     }
 `;
 
@@ -51,7 +52,7 @@ const UserNav = styled.div`
 `;
 
 const IconButton = styled.a`
-    color: #495057;
+    color: ${props => props.theme.secondaryText};
     display: flex;
     align-items: center;
     font-size: 20px;
@@ -59,7 +60,7 @@ const IconButton = styled.a`
     cursor: pointer;
 
     &:hover {
-        color: #212529;
+        color: ${props => props.theme.text};
     }
 `;
 
@@ -82,20 +83,20 @@ const FilterSelect = styled.select`
     padding: 6px 12px;
     font-size: 14px;
     font-weight: 600;
-    color: #495057;
-    background-color: white;
-    border: 1px solid #dee2e6;
+    color: ${props => props.theme.text};
+    background-color: ${props => props.theme.cardBody};
+    border: 1px solid ${props => props.theme.border};
     border-radius: 6px;
     outline: none;
     cursor: pointer;
     margin-bottom: 8px;
 
     &:focus {
-        border-color: #12b886;
+        border-color: ${props => props.theme.primary};
     }
 `;
 
-// 2. 관리 보수가 간편하도록 상단 메뉴 구성을 설정 데이터화(Configuration Data)
+// 관리 보수가 간편하도록 상단 메뉴 구성을 설정 데이터화(Configuration Data)
 const MENU_ITEMS = [
     { id: "trending", text: "트렌딩", icon: <MdOutlineTrendingUp /> },
     { id: "recommended", text: "추천", icon: <FaRegStar /> },
@@ -126,7 +127,6 @@ function Header() {
             
             <SubContainer>
                 <MenuBar>
-                    {/* 3. 수동 작성을 지우고 데이터 기반으로 자식 컴포넌트 맵핑 */}
                     {MENU_ITEMS.map((item) => (
                         <Menu
                             key={item.id}

@@ -57,7 +57,7 @@ function Sidebar() {
     const [showScrollTop, setShowScrollTop] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
 
-    // 1. 스크롤 감지 및 맨 위로 버튼 토글
+    // 스크롤 감지 및 맨 위로 버튼 토글
     useEffect(() => {
         const handleScroll = () => {
             setShowScrollTop(window.scrollY > 300);
@@ -66,7 +66,7 @@ function Sidebar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // 2. 현재 게시글의 북마크 여부 확인 (postId가 바뀔 때마다 실행)
+    // 현재 게시글의 북마크 여부 확인 (postId가 바뀔 때마다 실행)
     useEffect(() => {
         if (!postId) return;
         const bookmarks = JSON.parse(localStorage.getItem('welog-bookmarks') || '[]');
@@ -77,7 +77,7 @@ function Sidebar() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // 3. 링크 공유 기능 구현
+    // 링크 공유 기능 구현
     const handleShare = async () => {
         try {
             await navigator.clipboard.writeText(window.location.href);
@@ -87,7 +87,7 @@ function Sidebar() {
         }
     };
 
-    // 4. 북마크 토글 기능 구현
+    // 북마크 토글 기능 구현
     const handleBookmarkToggle = () => {
         if (!postId) {
             alert('상세 게시글 페이지에서만 북마크 기능을 사용할 수 있습니다.');

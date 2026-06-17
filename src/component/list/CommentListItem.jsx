@@ -8,9 +8,9 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row; 
     align-items: center; 
-    border-bottom: 1px solid #f1f3f5;
-    border-radius: 16px;
-    background: white;
+    border-bottom: 1px solid ${props => props.theme.border}; 
+    background: ${props => props.theme.cardBody}; 
+    transition: background-color 0.25s ease, border-color 0.25s ease;
 `;
 
 const LeftArea = styled.div`
@@ -34,7 +34,7 @@ const InfoContainer = styled.div`
 const WriterName = styled.span`
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: ${props => props.theme.text};
     margin-bottom: 0;
     margin-top: 4px;
 `;
@@ -48,7 +48,7 @@ const DateText = styled.span`
 const ContentText = styled.div`
     font-size: 16px;
     line-height: 1.6;
-    color: #212529;
+    color: ${props => props.theme.text}; 
     white-space: pre-wrap;
 `;
 

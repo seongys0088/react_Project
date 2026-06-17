@@ -18,6 +18,10 @@ const Layout = styled.div`
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  /* 테마 변경 시 디자인 규격 유지하며 색상만 변경되도록 설정 */
+  background-color: ${props => props.theme.body};
+  color: ${props => props.theme.text};
+  transition: background-color 0.25s ease, color 0.25s ease;
 `;
 
 const Main = styled.div`
