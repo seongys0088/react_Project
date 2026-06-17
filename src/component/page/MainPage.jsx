@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom'; // useSearchParams 추가
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostList from '../list/PostList';
 import Button from '../ui/Button';
@@ -29,18 +29,47 @@ const FeedStatusNotice = styled.div`
     margin-bottom: 32px;
 `;
 
+const parseKoreanDate = (dateString) => {
+    if (!dateString) return new Date(0);
+    const matches = dateString.match(/(\d+)년\s*(\d+)월\s*(\d+)일/);
+    if (matches) {
+        const [_, year, month, day] = matches;
+        return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    }
+    return new Date(dateString); // 예외 상황 방어 코드
+};
+
 function MainPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     
     // 현재 활성화된 탭 파라미터 획득 (디폴트: trending)
     const currentTab = searchParams.get("tab") || "trending";
+    // 💡 Header와 동기화된 time 파라미터 수집 (기본값: 이번 주)
+    const timeFilter = searchParams.get("time") || "week";
 
     // 얕은 복사본을 만들어 원본 데이터 오염 방지 및 동적 정렬 로직 적용
     let sortedPosts = [...data];
 
     if (currentTab === "trending") {
-        // 댓글(replyCount) 개수가 많은 순으로 정렬
+        const now = new Date(); 
+
+        sortedPosts = sortedPosts.filter(post => {
+            const postDate = parseKoreanDate(post.date);
+            const timeDiff = now.getTime() - postDate.getTime();
+            const dayDiff = timeDiff / (1000 * 60 * 60 * 24); // 일 단위로 환산
+
+            if (timeFilter === "today") {
+                return dayDiff <= 1; // 24시간 이내의 글
+            } else if (timeFilter === "week") {
+                return dayDiff <= 7; // 7일 이내의 글
+            } else if (timeFilter === "month") {
+                return dayDiff <= 30; // 30일 이내의 글
+            }
+            return true;
+        });
+
+        // 필터링된 범위 안에서 기존 기획대로 댓글(replyCount)이 많은 순으로 정렬
         sortedPosts.sort((a, b) => (b.replyCount || 0) - (a.replyCount || 0));
     } else if (currentTab === "recommended") {
         // 좋아요(like)가 높은 순으로 정렬

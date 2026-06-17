@@ -126,9 +126,20 @@ function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     
     const currentTab = searchParams.get("tab") || "trending";
+    const currentTimeFilter = searchParams.get("time") || "week";
 
     const handleTabChange = (tabName) => {
-        navigate(`/?tab=${tabName}`);
+        // 탭이 바뀔 때 기본 기간 필터도 유연하게 연결되도록 URL 구조를 설계합니다.
+        if (tabName === "trending") {
+            navigate(`/?tab=${tabName}&time=week`);
+        } else {
+            navigate(`/?tab=${tabName}`);
+        }
+    };
+
+    const handleTimeFilterChange = (e) => {
+        const selectedTime = e.target.value;
+        navigate(`/?tab=trending&time=${selectedTime}`);
     };
 
     const toggleSearch = () => {
@@ -178,10 +189,13 @@ function Header() {
                 <div>
                     {currentTab === "trending" && (
                         <form>
-                            <FilterSelect>
-                                <option>오늘</option>
-                                <option>이번 주</option>
-                                <option>이번 달</option>
+                            <FilterSelect 
+                                value={currentTimeFilter} 
+                                onChange={handleTimeFilterChange}
+                            >
+                                <option value="today">오늘</option>
+                                <option value="week">이번 주</option>
+                                <option value="month">이번 달</option>
                             </FilterSelect>
                         </form>
                     )}
