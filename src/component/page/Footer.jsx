@@ -3,10 +3,11 @@ import styled from 'styled-components';
 
 const Wrapper = styled.footer`
     width: 100%;
-    background-color: #ffffff;
-    border-top: 1px solid #efefef;
+    background-color: ${props => props.theme.cardBody};
+    border-top: 1px solid ${props => props.theme.border};
     display: flex;
     justify-content: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 `;
 
 const Container = styled.div`
@@ -27,7 +28,8 @@ const Container = styled.div`
 
 const LeftSection = styled.div`
     font-size: 13px;
-    color: #868e96;
+    color: ${props => props.theme.secondaryText};
+    transition: color 0.3s ease;
     
     @media (max-width: 768px) {
         text-align: center;
@@ -39,7 +41,16 @@ const RightSection = styled.div`
     gap: 12px;
     font-size: 13px;
     font-weight: 600;
-    color: #495057;
+    color: ${props => props.theme.text};
+    transition: color 0.3s ease;
+
+    span {
+        color: ${props => props.theme.secondaryText};
+    }
+
+    a:hover {
+        color: ${props => props.theme.primary};
+    }
 `;
 
 function Footer() {
