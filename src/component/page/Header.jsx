@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginButton from "../ui/LoginButton";
 import Menu from "../ui/Menu";
+import NotificationDropdown from "../ui/NotificationDropdown";
 
 // icon
 import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
@@ -96,6 +97,12 @@ const FilterSelect = styled.select`
     }
 `;
 
+const BellContainer = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+`;
+
 // 관리 보수가 간편하도록 상단 메뉴 구성을 설정 데이터화(Configuration Data)
 const MENU_ITEMS = [
     { id: "trending", text: "트렌딩", icon: <MdOutlineTrendingUp /> },
@@ -107,6 +114,8 @@ const MENU_ITEMS = [
 function Header() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
+
+    const [isNotificationOpen, setIsNotificationOpen] = useState(false);
     
     const currentTab = searchParams.get("tab") || "trending";
 
@@ -120,7 +129,14 @@ function Header() {
                 <MainTitle onClick={() => navigate("/")}>We<span>log</span></MainTitle>
                 <UserNav>
                     <IconButton><FaSearch /></IconButton>
-                    <IconButton><FaRegBell /></IconButton>
+                    <BellContainer>
+                        <IconButton onClick={() => setIsNotificationOpen(!isNotificationOpen)}>
+                            <FaRegBell />
+                        </IconButton>
+                        {isNotificationOpen && (
+                            <NotificationDropdown onClose={() => setIsNotificationOpen(false)} />
+                        )}
+                    </BellContainer>
                     <LoginButton />
                 </UserNav>
             </TopContainer>
