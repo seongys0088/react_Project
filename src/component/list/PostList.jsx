@@ -1,4 +1,3 @@
-/* src/component/list/PostList.jsx */
 import React from 'react';
 import styled from 'styled-components';
 import PostListItem from './PostListItem';

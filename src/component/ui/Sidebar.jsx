@@ -1,4 +1,3 @@
-/* src/component/ui/Sidebar.jsx */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
