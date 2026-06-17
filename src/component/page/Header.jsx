@@ -126,12 +126,12 @@ function Header() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     
     const currentTab = searchParams.get("tab") || "trending";
-    const currentTimeFilter = searchParams.get("time") || "week";
+    const currentTimeFilter = searchParams.get("time") || "month";
 
     const handleTabChange = (tabName) => {
         // 탭이 바뀔 때 기본 기간 필터도 유연하게 연결되도록 URL 구조를 설계합니다.
         if (tabName === "trending") {
-            navigate(`/?tab=${tabName}&time=week`);
+            navigate(`/?tab=${tabName}&time=month`);
         } else {
             navigate(`/?tab=${tabName}`);
         }
@@ -155,7 +155,7 @@ function Header() {
     return (
         <Wrapper>
             <TopContainer>
-                <MainTitle onClick={() => navigate("/")}>We<span>log</span></MainTitle>
+                <MainTitle onClick={() => navigate("/")}>Dev<span>Square</span></MainTitle>
                 <UserNav>
                     <NavItemContainer>
                         <IconButton onClick={toggleSearch}><FaSearch /></IconButton>

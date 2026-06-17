@@ -45,8 +45,8 @@ function MainPage() {
     
     // 현재 활성화된 탭 파라미터 획득 (디폴트: trending)
     const currentTab = searchParams.get("tab") || "trending";
-    // 💡 Header와 동기화된 time 파라미터 수집 (기본값: 이번 주)
-    const timeFilter = searchParams.get("time") || "week";
+    // 💡 Header와 동기화된 time 파라미터 수집 (기본값: 이번 달)
+    const timeFilter = searchParams.get("time") || "month";
 
     // 얕은 복사본을 만들어 원본 데이터 오염 방지 및 동적 정렬 로직 적용
     let sortedPosts = [...data];

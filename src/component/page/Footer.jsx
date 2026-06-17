@@ -47,7 +47,7 @@ function Footer() {
         <Wrapper>
             <Container>
                 <LeftSection>
-                    <p>© 2026 Welog. Developed by 성윤수 (컴퓨터소프트웨어과)</p>
+                    <p>© 2026 DevSquare. Developed by 성윤수 (컴퓨터소프트웨어과)</p>
                 </LeftSection>
                 <RightSection>
                     <a href="">이용약관</a>
