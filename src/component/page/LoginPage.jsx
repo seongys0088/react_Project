@@ -133,7 +133,7 @@ function LoginPage() {
         <Wrapper>
             <LoginCard>
                 <LogoContainer>
-                    <BrandTitle onClick={() => navigate("/")}>We<span>log</span></BrandTitle>
+                    <BrandTitle onClick={() => navigate("/")}>Dev<span>Square</span></BrandTitle>
                     <SubText>기술 블로그에 오신 것을 환영합니다.</SubText>
                 </LogoContainer>
 

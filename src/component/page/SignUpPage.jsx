@@ -140,7 +140,7 @@ function SignUpPage() {
         <Wrapper>
             <SignUpCard>
                 <LogoContainer>
-                    <BrandTitle>We<span>log</span></BrandTitle>
+                    <BrandTitle>Dev<span>Square</span></BrandTitle>
                     <SubText>새로운 계정을 생성하세요.</SubText>
                 </LogoContainer>
 
