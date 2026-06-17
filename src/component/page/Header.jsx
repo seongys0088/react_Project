@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginButton from "../ui/LoginButton";
 import Menu from "../ui/Menu";
 import NotificationDropdown from "../ui/NotificationDropdown";
+import SearchInput from "../ui/SearchInput";
 
 // icon
 import { FaRegBell, FaSearch, FaRegStar } from "react-icons/fa";
@@ -50,6 +51,12 @@ const UserNav = styled.div`
     display: flex; 
     align-items: center;
     gap: 20px;
+`;
+
+const NavItemContainer = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
 `;
 
 const IconButton = styled.a`
@@ -116,6 +123,7 @@ function Header() {
     const [searchParams] = useSearchParams();
 
     const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
     
     const currentTab = searchParams.get("tab") || "trending";
 
@@ -123,20 +131,33 @@ function Header() {
         navigate(`/?tab=${tabName}`);
     };
 
+    const toggleSearch = () => {
+        setIsSearchOpen(!isSearchOpen);
+        setIsNotificationOpen(false);
+    };
+
+    const toggleNotification = () => {
+        setIsNotificationOpen(!isNotificationOpen);
+        setIsSearchOpen(false);
+    };
+
     return (
         <Wrapper>
             <TopContainer>
                 <MainTitle onClick={() => navigate("/")}>We<span>log</span></MainTitle>
                 <UserNav>
-                    <IconButton><FaSearch /></IconButton>
-                    <BellContainer>
-                        <IconButton onClick={() => setIsNotificationOpen(!isNotificationOpen)}>
-                            <FaRegBell />
-                        </IconButton>
+                    <NavItemContainer>
+                        <IconButton onClick={toggleSearch}><FaSearch /></IconButton>
+                        {isSearchOpen && (
+                            <SearchInput onClose={() => setIsSearchOpen(false)} />
+                        )}
+                    </NavItemContainer>
+                    <NavItemContainer>
+                        <IconButton onClick={toggleNotification}><FaRegBell /></IconButton>
                         {isNotificationOpen && (
                             <NotificationDropdown onClose={() => setIsNotificationOpen(false)} />
                         )}
-                    </BellContainer>
+                    </NavItemContainer>
                     <LoginButton />
                 </UserNav>
             </TopContainer>
