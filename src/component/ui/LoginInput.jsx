@@ -11,26 +11,27 @@ const InputWrapper = styled.div`
 const InputLabel = styled.label`
     font-size: 13px;
     font-weight: 600;
-    color: #495057;
+    color: ${props => props.theme.text};
+    transition: color 0.25s ease;
 `;
 
 const StyledInput = styled.input`
     width: 100%;
     padding: 14px 16px;
     font-size: 15px;
-    color: #212529;
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
+    color: ${props => props.theme.text};
+    background-color: ${props => props.theme.body};
+    border: 1px solid ${props => props.theme.border};
     border-radius: 8px;
     outline: none;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out, background-color 0.25s ease, border-color 0.25s ease;
 
     &::placeholder {
-        color: #adb5bd;
+        color: ${props => props.theme.secondaryText};
     }
 
     &:focus {
-        border-color: #12b886;
+        border-color: ${props => props.theme.primary};
         box-shadow: 0 0 0 3px rgba(18, 184, 134, 0.08);
     }
 `;

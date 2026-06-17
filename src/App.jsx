@@ -11,8 +11,9 @@ import PostWritePage from './component/page/PostWritePage';
 import PostViewPage from './component/page/PostViewPage';
 import MyPage from './component/page/MyPage';
 import LoginPage from "./component/page/LoginPage";
-import Sidebar from './component/ui/Sidebar';
+import SignUpPage from './component/page/SignUpPage';
 import Footer from './component/page/Footer';
+import Sidebar from './component/ui/Sidebar';
 
 const Layout = styled.div`
   min-height: 100svh;
@@ -42,6 +43,7 @@ function App(props) {
                 <Route path="post/:postId" element={<PostViewPage />} />
                 <Route path="mypage/:profileId" element={<MyPage />} />
                 <Route path="login" element={<LoginPage />} />
+                <Route path="signup" element={<SignUpPage />} />
             </Routes>
           </Main>
           <Sidebar />
