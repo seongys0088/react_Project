@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
+import { UserProvider, useUser } from './context/UserContext';
 
 // pages
 import Header from './component/page/Header';
@@ -33,24 +34,26 @@ const Main = styled.div`
 function App(props) {
   return (
     <ThemeProvider>
-      <BrowserRouter>
-        <Layout>
-          <Header />
-          <Main>
-            <Routes>
-                <Route index element={<MainPage />} />
-                <Route path="post-write" element={<PostWritePage />} />
-                <Route path="post-edit/:postId" element={<PostWritePage />} />
-                <Route path="post/:postId" element={<PostViewPage />} />
-                <Route path="mypage/:profileId" element={<MyPage />} />
-                <Route path="login" element={<LoginPage />} />
-                <Route path="signup" element={<SignUpPage />} />
-            </Routes>
-          </Main>
-          <Sidebar />
-          <Footer />
-        </Layout>
-      </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
+          <Layout>
+            <Header />
+            <Main>
+              <Routes>
+                  <Route index element={<MainPage />} />
+                  <Route path="post-write" element={<PostWritePage />} />
+                  <Route path="post-edit/:postId" element={<PostWritePage />} />
+                  <Route path="post/:postId" element={<PostViewPage />} />
+                  <Route path="mypage/:profileId" element={<MyPage />} />
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="signup" element={<SignUpPage />} />
+              </Routes>
+            </Main>
+            <Sidebar />
+            <Footer />
+          </Layout>
+        </BrowserRouter>
+      </UserProvider>
     </ThemeProvider>
   );
 }

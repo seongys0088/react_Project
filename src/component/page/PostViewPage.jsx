@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CommentList from "../list/CommentList";
 import Button from "../ui/Button";
 import data from "../../data.json";
+import { useUser } from "../../context/UserContext";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -119,10 +120,7 @@ function PostViewPage() {
     const navigate = useNavigate();
     const { postId } = useParams();
 
-    // 임시 로그인 유저 정보 (테스트용: '피카츄'나 '야돈' 등으로 변경해서 확인 가능)
-    const currentUser = {
-        name: "피카츄"
-    };
+    const { user } = useUser();
 
     const post = data.find((item) => item.id == postId);
     
@@ -132,10 +130,8 @@ function PostViewPage() {
         return <Wrapper style={{padding: "40px"}}>해당 게시글을 찾을 수 없습니다.</Wrapper>;
     }
 
-    // 작성자 본인 확인 로직
-    const isAuthor = currentUser && currentUser.name === post.writer;
+    const isAuthor = user && user.name === post.writer;
 
-    // 글 삭제 핸들러
     const handleDelete = () => {
         if (window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
             console.log(`게시글 ID ${postId} 삭제 요청`);
@@ -144,7 +140,6 @@ function PostViewPage() {
         }
     };
 
-    // 글 수정 핸들러
     const handleEdit = () => {
         navigate(`/post-edit/${postId}`);
     };
