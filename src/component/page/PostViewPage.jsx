@@ -147,7 +147,7 @@ function PostViewPage() {
     // 글 수정 핸들러
     const handleEdit = () => {
         navigate(`/post-edit/${postId}`);
-};
+    };
 
     return (
         <Wrapper>
