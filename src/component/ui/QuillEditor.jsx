@@ -7,34 +7,43 @@ const EditorWrapper = styled.div`
     width: 100%;
 
     .ql-toolbar.ql-snow {
-        border: 1px solid ${props => props.theme.border || '#e9ecef'};
-        border-radius: 12px 12px 0 0;
-        background-color: ${props => props.theme.body || '#fff'};
-        padding: 12px;
+        border: none;
+        border-bottom: 1px solid #e9ecef;
+        padding: 12px 8px;
+        display: flex;
+        flex-wrap: wrap; 
+        align-items: center;
+        gap: 12px;
     }
 
     .ql-toolbar.ql-snow .ql-formats {
-        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        margin: 0; 
+    }
+
+    .ql-toolbar.ql-snow button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
     }
 
     .ql-container.ql-snow {
-        border: 1px solid ${props => props.theme.border || '#e9ecef'};
-        border-top: none;
-        border-radius: 0 0 12px 12px;
+        border: none;
         font-size: 16px;
-        color: ${props => props.theme.text || '#212529'};
+        color: #212529;
         font-family: inherit;
         min-height: ${(props) => props.height || '450px'};
-        background-color: ${props => props.theme.cardBody || '#fff'};
     }
 
     .ql-editor {
-        padding: 20px;
-        line-height: 1.6;
+        padding: 16px;
     }
 
     .ql-editor.ql-blank::before {
-        left: 20px;
+        left: 16px;
         color: #adb5bd;
         font-style: normal;
     }
@@ -43,7 +52,7 @@ const EditorWrapper = styled.div`
 function QuillEditor({ value, onChange, placeholder, height }) {
     const modules = {
         toolbar: [
-            [{ header: [1, 2, 3, false] }], // h1, h2, h3 조절 가능하도록 추가
+            [{ header: [1, 2, false] }],
             ["bold", "italic", "underline", "strike"],
             [{ list: "ordered" }, { list: "bullet" }],
             ["link"],
@@ -58,7 +67,7 @@ function QuillEditor({ value, onChange, placeholder, height }) {
                 modules={modules}
                 value={value}
                 onChange={onChange}
-                placeholder={placeholder || "내용을 입력하세요..."}
+                placeholder={placeholder || "당신의 기술을 공유해주세요..."}
             />
         </EditorWrapper>
     );

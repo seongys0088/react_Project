@@ -25,6 +25,22 @@ const Container = styled.div`
     }
 `;
 
+const TitleInput = styled.input`
+    width: 100%;
+    padding: 16px 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #212529;
+    border: none;
+    border-bottom: 1px solid #e9ecef;
+    outline: none;
+    background: transparent;
+
+    &::placeholder {
+        color: #adb5bd;
+    }
+`;
+
 function PostWritePage() {
     const navigate = useNavigate();
     const { postId } = useParams();
@@ -71,11 +87,11 @@ function PostWritePage() {
             <Container>
                 <h2>{isEditMode ? "게시글 수정하기" : "새로운 게시글 작성"}</h2>
                 
-                <TextInput
-                    height={20}
+                <TitleInput
+                    type="text"
+                    placeholder="제목을 입력하세요"
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
-                    placeholder="제목을 입력하세요"
                 />
 
                 <QuillEditor 
