@@ -26,7 +26,7 @@ const HeaderProfileImg = styled.img`
 const StyledButton = styled.button`
     padding: 6px 16px;
     border-radius: 16px;
-    background-color: ${props => props.isLogout ? '#ef4444' : '#212529'};
+    background-color: ${props => props.$isLogout ? '#ef4444' : '#212529'};
     color: white;
     font-size: 14px;
     font-weight: 700;
@@ -35,7 +35,7 @@ const StyledButton = styled.button`
     transition: all 0.2s;
 
     &:hover {
-        background-color: ${props => props.isLogout ? '#dc2626' : '#495057'};
+        background-color: ${props => props.$isLogout ? '#dc2626' : '#495057'};
     }
 `;
 
