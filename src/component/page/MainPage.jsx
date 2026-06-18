@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import PostList from '../list/PostList';
@@ -43,43 +43,40 @@ function MainPage() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     
-    // 현재 활성화된 탭 파라미터 획득 (디폴트: trending)
     const currentTab = searchParams.get("tab") || "trending";
-    // 💡 Header와 동기화된 time 파라미터 수집 (기본값: 이번 달)
     const timeFilter = searchParams.get("time") || "month";
 
-    // 얕은 복사본을 만들어 원본 데이터 오염 방지 및 동적 정렬 로직 적용
-    let sortedPosts = [...data];
+    // 💡 useMemo를 활용한 데이터 필터링 및 정렬 최적화
+    const sortedPosts = useMemo(() => {
+        let posts = [...data];
+        const now = new Date();
 
-    if (currentTab === "trending") {
-        const now = new Date(); 
+        if (currentTab === "trending") {
+            return posts.filter(post => {
+                const postDate = parseKoreanDate(post.date);
+                const timeDiff = now.getTime() - postDate.getTime();
+                const dayDiff = timeDiff / (1000 * 60 * 60 * 24);
 
-        sortedPosts = sortedPosts.filter(post => {
-            const postDate = parseKoreanDate(post.date);
-            const timeDiff = now.getTime() - postDate.getTime();
-            const dayDiff = timeDiff / (1000 * 60 * 60 * 24); // 일 단위로 환산
+                // 과거 데이터이므로 dayDiff는 0보다 크거나 같아야 하며 표준 범위 내여야 함
+                if (dayDiff < 0) return false; 
+                
+                if (timeFilter === "today") return dayDiff <= 1;
+                if (timeFilter === "week") return dayDiff <= 7;
+                if (timeFilter === "month") return dayDiff <= 30;
+                return true;
+            }).sort((a, b) => (b.replyCount || 0) - (a.replyCount || 0));
+        } 
+        
+        if (currentTab === "recommended") {
+            return posts.sort((a, b) => (b.like || 0) - (a.like || 0));
+        } 
+        
+        if (currentTab === "latest") {
+            return posts.sort((a, b) => b.id - a.id);
+        }
 
-            if (timeFilter === "today") {
-                return dayDiff <= 1; // 24시간 이내의 글
-            } else if (timeFilter === "week") {
-                return dayDiff <= 7; // 7일 이내의 글
-            } else if (timeFilter === "month") {
-                return dayDiff <= 30; // 30일 이내의 글
-            }
-            return true;
-        });
-
-        // 필터링된 범위 안에서 기존 기획대로 댓글(replyCount)이 많은 순으로 정렬
-        sortedPosts.sort((a, b) => (b.replyCount || 0) - (a.replyCount || 0));
-    } else if (currentTab === "recommended") {
-        // 좋아요(like)가 높은 순으로 정렬
-        sortedPosts.sort((a, b) => (b.like || 0) - (a.like || 0));
-    } else if (currentTab === "latest") {
-        // 최신 등록 데이터 순
-        sortedPosts.sort((a, b) => b.id - a.id);
-    } else if (currentTab === "feed") {
-        // 피드 탭만의 특별한 필터 예시
-    }
+        return posts;
+    }, [currentTab, timeFilter]);
 
     return (
         <Wrapper>

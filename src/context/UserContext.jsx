@@ -5,8 +5,14 @@ const UserContext = createContext(null);
 export function UserProvider({ children }) {
     // 실제 운영 환경에서는 초기값으로 localStorage나 쿠키에서 유저 정보를 읽어옵니다.
     const [user, setUser] = useState(() => {
-        const savedUser = localStorage.getItem("currentUser");
-        return savedUser ? JSON.parse(savedUser) : null; 
+        try {
+            const savedUser = localStorage.getItem("currentUser");
+            return savedUser ? JSON.parse(savedUser) : null; 
+        } catch (error) {
+            console.error("Failed to parse user data from localStorage:", error);
+            localStorage.removeItem("currentUser"); // 오염된 데이터 정화
+            return null;
+        }
     });
 
     const login = (userData) => {
