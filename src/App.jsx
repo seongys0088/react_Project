@@ -40,6 +40,7 @@ function App(props) {
             <Routes>
                 <Route index element={<MainPage />} />
                 <Route path="post-write" element={<PostWritePage />} />
+                <Route path="post-edit/:postId" element={<PostWritePage />} />
                 <Route path="post/:postId" element={<PostViewPage />} />
                 <Route path="mypage/:profileId" element={<MyPage />} />
                 <Route path="login" element={<LoginPage />} />

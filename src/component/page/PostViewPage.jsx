@@ -28,13 +28,19 @@ const TitleText = styled.h1`
     margin-bottom: 24px;
 `;
 
+const PostInfoRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 48px;
+`;
+
 const PostInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 15px;
     color: ${props => props.theme.secondaryText};
-    margin-bottom: 48px;
 
     .writer {
         font-weight: 700;
@@ -42,6 +48,12 @@ const PostInfo = styled.div`
     }
     .divider {
         color: ${props => props.theme.border};
+    }
+`;
+
+const ActionButtonGroup = styled.div`
+    display: flex;
+    gap: 8px;
 `;
 
 const ContentContainer = styled.article`
@@ -107,6 +119,11 @@ function PostViewPage() {
     const navigate = useNavigate();
     const { postId } = useParams();
 
+    // 임시 로그인 유저 정보 (테스트용: '피카츄'나 '야돈' 등으로 변경해서 확인 가능)
+    const currentUser = {
+        name: "피카츄"
+    };
+
     const post = data.find((item) => item.id == postId);
     
     const [comment, setComment] = useState("");
@@ -115,16 +132,51 @@ function PostViewPage() {
         return <Wrapper style={{padding: "40px"}}>해당 게시글을 찾을 수 없습니다.</Wrapper>;
     }
 
+    // 작성자 본인 확인 로직
+    const isAuthor = currentUser && currentUser.name === post.writer;
+
+    // 글 삭제 핸들러
+    const handleDelete = () => {
+        if (window.confirm("정말로 이 게시글을 삭제하시겠습니까?")) {
+            console.log(`게시글 ID ${postId} 삭제 요청`);
+            alert("게시글이 삭제되었습니다.");
+            navigate("/"); 
+        }
+    };
+
+    // 글 수정 핸들러
+    const handleEdit = () => {
+        navigate(`/post-edit/${postId}`);
+};
+
     return (
         <Wrapper>
             <Container>
                 <header>
                     <TitleText>{post.title}</TitleText>
-                    <PostInfo>
-                        <span className="writer">{post.writer}</span>
-                        <span className="divider">·</span>
-                        <span>{post.date}</span>
-                    </PostInfo>
+                    <PostInfoRow>
+                        <PostInfo>
+                            <span className="writer">{post.writer}</span>
+                            <span className="divider">·</span>
+                            <span>{post.date}</span>
+                        </PostInfo>
+                        
+                        {/* 본인이 작성한 글일 때만 수정/삭제 버튼 노출 */}
+                        {isAuthor && (
+                            <ActionButtonGroup>
+                                <Button 
+                                    title="수정" 
+                                    onClick={handleEdit}
+                                    variant="secondary"
+                                />
+                                <Button 
+                                    title="삭제" 
+                                    onClick={handleDelete}
+                                    style={{ backgroundColor: "#ff6b6b", color: "#fff" }} 
+                                />
+                            </ActionButtonGroup>
+                        )}
+                    </PostInfoRow>
                 </header>
 
                 <ContentContainer>{post.content}</ContentContainer>
@@ -136,7 +188,6 @@ function PostViewPage() {
                     <CommentLabel>{post.comments ? post.comments.length : 0}개의 댓글</CommentLabel>
                     
                     <CommentForm>
-                        {/* 깔끔한 단일 input 창으로 교체 및 value, onChange 로직 매핑 */}
                         <StyledCommentInput
                             type="text"
                             value={comment}
@@ -146,7 +197,6 @@ function PostViewPage() {
                         <Button
                             title="댓글 작성"
                             onClick={() => {
-                                // 로직 보존: 기존 콘솔 출력 및 초기화 흐름 유지
                                 console.log("저장될 댓글 데이터:", comment);
                                 setComment(""); 
                             }}
